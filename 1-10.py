@@ -25,15 +25,15 @@ def checkSum2(numbCheckSum, list):
             resto.add(numbCheckSum - int(num))
 
 
-
 # numbString =input("Digite uma lista de números? ").split(', ')
 # numbCheckSum = int(input("Digite o número a verificar? "))
 # print(checkSum1(numbCheckSum, numbString))
 # print(checkSum2(numbCheckSum, numbString))
 
+
 # endregion
 
-# region Ex 2 - Produto dos números duma lista excepto dele próprio
+# region Ex 2 - Array - Produto dos números duma lista excepto dele próprio
 # --------------------------------------------------------------
 # 2
 #
@@ -145,7 +145,7 @@ assert Node.deserialize(Node.serialize(node)).left.left.val == 'left.left'
 
 # endregion
 
-# region Ex 4 - Find First Pos Integer
+# region Ex 4 - Array - lowest positive integer
 
 # --------------------------------------------------------------
 # This problem was asked by Stripe.
@@ -187,5 +187,84 @@ def first_missing_positive_set(nums):
 
 # region - How To Solve a Hard Programming Interview Question
 
+# endregion
+
+# region Ex 5 - Lambda - Implement Cons Class
+
+# --------------------------------------------------------------
+# cons(a, b) constructs a pair, and car(pair) and cdr(pair) returns the first and last element of that pair.
+# For example, car(cons(3, 4)) returns 3, and cdr(cons(3, 4)) returns 4.
+#
+# Given this implementation of cons:
+#
+# def cons(a, b):
+#     def pair(f):
+#         return f(a, b)
+#     return pair
+#
+# Implement car and cdr.
+#
+# --------------------------------------------------------------
+
+
+def cons(a, b):
+    def pair(f):
+        return f(a, b)
+    return pair
+
+
+def car(pair):
+    return pair(lambda a, b: a)
+
+
+def cdr(pair):
+    return pair(lambda a, b: b)
+
+#print(car(cons(3, 4)))
+#print(cdr(cons(3, 4)))
 
 # endregion
+
+#region Ex 6 - XOR Linked List
+
+# --------------------------------------------------------------
+# An XOR linked list is a more memory efficient doubly linked list. Instead of each node holding next and prev fields,
+# it holds a field named both, which is an XOR of the next node and the previous node.
+#
+# Implement an XOR linked list;
+# it has an add(element) which adds the element to the end, and a get(index) which returns the node at index.
+#
+# If using a language that has no pointers (such as Python), you can assume you have access to get_pointer and
+# dereference_pointer functions that converts between nodes and memory addresses.
+#
+# --------------------------------------------------------------
+
+class Node:
+    def __init__(self, value=None):
+        self.value = value
+        self.next = None
+        return
+
+    def has_value(self, value):
+        if self.value == value:
+            return True
+        else:
+            return False
+
+class LinkedXorList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def add(self, item):
+        if not isinstance(item, Node):
+            item = Node(item)
+
+        if self.head is None:
+            self.head = item
+        else:
+            self.tail.next = item
+
+        self.tail = item
+
+    def get(self, idx):
